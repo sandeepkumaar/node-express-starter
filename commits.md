@@ -10,15 +10,27 @@ node index.js -p 9090
 ```
 
 ### Add http logger 
-
+ref: https://github.com/expressjs/morgan/issues/40
 ```
 npm install morgan --save
 ```
 Log Purpose: 
 - debugging
 - analysis 
+- parseable
 
-log formats should be easily convertable
+req: 
+- id
+- date
+- remote-addr
+- remote-user
+- method
+- url
+response: 
+- id
+- date
+- res content-length
+- res time
 
 ### Define routes 
 

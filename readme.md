@@ -17,6 +17,9 @@ run indepently
 lint on save
 re-start server on save??? or re-start on test success
 
+## Test
+All middleware should return otherwise server hangs 
+
 ## Forks
 1. db connection
 2. authentication
