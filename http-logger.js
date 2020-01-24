@@ -5,6 +5,7 @@
  * `id` token to corelate the req/res
  * ref; https://github.com/expressjs/morgan/issues/40
  */
+/*
 const morgan = require("morgan");
 
 morgan.token("id", function(req) {
@@ -19,3 +20,8 @@ let res = morgan('<-- :id [:date[clf]] ":method :url " :status :res[content-leng
 });
 
 module.exports = { req, res };
+*/
+
+//var require("bunyan");
+
+
