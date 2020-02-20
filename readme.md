@@ -1,61 +1,81 @@
-## Aim
-Starter template for RESTful app with Expressjs 
+## node-express-starter 
+Starter template for Restful apis with express 
 Includes 
-- http logger (morga) 
-- app logger (bunyan)
+- logger (bunyan)
+  - httpLogger containing `req_Id` to track
+  - errorLogger  
+- req validator 
+- common error handler
+- auth middleware
+- load configs based on env
+- feature/module wise folder structure
+- db connection
+- test cases for api
 
-## Requirements
-- Start server options from command args 
-- folder structure in terms of modules. ie. each individual modules can  
-run indepently
-- MVC architecture ?? 
-- usefull middlewares. error handling. redirection techniques, precall-postcall
-- logging utils. follow standard logging formats. Justify use
-- Extension to third party integrations : db connection, 
+## Quick start
+```
+$ npm install
+$ npm start // runs in prod mode
+```
 
-## Dev requirements
-lint on save
-re-start server on save??? or re-start on test success
+## Commands
+```
+$ npm run dev // runs in dev mode
+```
 
-## Test
-All middleware should return otherwise server hangs 
-
-## Forks
-1. db connection
-2. authentication
-3. workers, micro-services
+## Dev features 
+- nodemon 
+- logger at debug level. logs to stdout and logs/dev.log
 
 
-## Bunyan
+## Branches
+
+
+## Dependencies
+### Bunyan
 why?
 - JSON format, easier for processing
-- Save all the required details in log as json, and format/filter them as needed as a separate
-process thru cli; Bunyan-cli. 
+- built-in cli Bunyan allows easier log inspection 
 
-### Things to note
+Note when logging:  
+log parameters takes
+- object that is merged with the logger props
+- string that goes into `message` 
+- anything after string is stringified along with `message`
+The order should be maintained.  
 ```
 log.info(obj={}, msg="", ...rest);
-
 //outputs
 logRecord = {
-  msg: "" + ...rest,
   ...obj
+  msg: "" + ...rest.toSting(),
+}
+
+// Example
+log.info({person:{name:"sandeep"}, y:"kumaar"}, msg="input person", {e: "somevalue");
+logRecord = {
+  person: {
+    name: "sandeep"
+  },
+  y: "kumaar",
+  msg: "input person {e: 'somevalue'}": 
 }
 ```
-since  `obj` is Object.assigned it would override with built-in prperties. 
-To avoid always provide ur namespace.
 
-### Log levels
-- use only debug, info, error log levels
-- dev log level: debug
-- prod log level: info
-- logger name => module name or concern
-- for dev, log to stdout (default)
-- for prod, log to a file. both error and output to same file
+#### opinions 
+- loglevels based on env prod=info, dev=debug
+- logger for each module/concern
+- log rotation handled by external tools. rotation logic is not app's concern
+its the container's concern
 
+#### inspect log
+```
+# filter log based on `req_Id`
+$ bunyan logs/app.log -c "this.res && this.res.req_Id ==2" -o json
 
-- use logger for every module
-- logger levels are decided by environmnents. prod=info dev=debug
+# show logs from a particular module 
+$ bunyan logs/app.log -c "this.name=='user'" -o json
+```
+the above filter in conjuction with `json` module can do log processing too
 
-
-
+## object validator
