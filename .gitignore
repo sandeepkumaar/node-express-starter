@@ -6,11 +6,11 @@
 
 # production
 
-
+/logs
+npm-debug.log*
+/curl
 # misc
 .DS_Store
-
-npm-debug.log*
 
 # my-files
 commits.md

@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js >> logs/app.log",
-    "dev": "nodemon index.js > logs/dev.log & npm run log",
-    "log": "tail -f logs/dev.log | bunyan -o json",
+    "dev": "nodemon index.js | ntee logs/dev.log | bunyan -o json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -25,6 +24,7 @@
   },
   "devDependencies": {
     "bunyan": "^1.8.12",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "ntee": "^2.0.0"
   }
 }

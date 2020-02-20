@@ -53,3 +53,9 @@ To avoid always provide ur namespace.
 - for dev, log to stdout (default)
 - for prod, log to a file. both error and output to same file
 
+
+- use logger for every module
+- logger levels are decided by environmnents. prod=info dev=debug
+
+
+

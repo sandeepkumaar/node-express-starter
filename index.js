@@ -1,9 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const httpLogger = require("./middlewares/http-logger");
-const errorLogger = require("./middlewares/error-logger");
+const { httpLogger, errorLogger }  = require("./logger");
 // modules
-//const user = require("./user");
+const user = require("./user");
 
 
 const app = express();
@@ -11,7 +10,7 @@ app.use(httpLogger); // log req, res
 app.use(bodyParser.json());
 
 // user module
-//app.use("/user",user);
+app.use("/user",user);
 
 app.get("/", function(req, res, next) {
   var x = new Error("asdf");
@@ -22,7 +21,9 @@ app.get("/", function(req, res, next) {
 
 
 app.use(errorLogger, function(err, req, res, next) {
-  // when no code specified set to 500 Internal Server Error
+  // sanity
+  if(res.headerSent) { return next(err) };
+  // an error passed without statusCode is assinged 500
   err.statusCode = (err.statusCode) ? err.statusCode : 500;
   res.status(err.statusCode).send(err);
 });
