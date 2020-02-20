@@ -16,7 +16,7 @@ const reqLog = bunyan.createLogger({
         url: req.url,
         method: req.method,
         protocol: req.protocol,
-        requestId: req.requestId,
+        req_Id: req.req_Id,
 
         // In case there's a proxy server:
         ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -34,7 +34,7 @@ const resLog = bunyan.createLogger({
       return {
         statusCode: res.statusCode,
         headers: res._header,
-        requestId: res.requestId,
+        req_Id: res.req_Id,
         responseTime: res.responseTime
       };
     }
@@ -42,19 +42,19 @@ const resLog = bunyan.createLogger({
 })
 /**
  * Express middleware to log Req, Res object
- * Adds requestId to Req 
+ * Adds req_Id to Req 
  * Adds responseTime to Res 
  * Log the Req and Res
  */
 module.exports = function httpLogger(req, res, next) {
   var startTime = new Date();
-  req.requestId = uuid(); 
+  req.req_Id = uuid(); 
 
   reqLog.info({req: req});
 
   res.on('finish', function () {
     res.responseTime = new Date() - startTime;
-    res.requestId = req.requestId;
+    res.req_Id = req.req_Id;
     resLog.info({res: res});
   });
 

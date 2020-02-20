@@ -12,7 +12,7 @@ router.get("/", function(req, res, next) {
 
 router.post("/create", function(req, res, next) {
   let { body } = req; 
-	log.debug({body});
+	log.debug({body}, "message", {misc: "stringified"});
   res.json(req.body);
 });
 
