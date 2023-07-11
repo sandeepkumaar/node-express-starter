@@ -1,7 +1,7 @@
 ## node-express-starter 
 Starter template for Restful apis with express 
 Includes 
-- logger (pino)
+- logger (pino) with context txnId
 - req validator 
 - common error handler
 - load configs based on env
@@ -30,7 +30,7 @@ $ npm run start:local // runs in dev mode
 - ~~logger (pino)~~
 - req validator 
 - ~~common error handler~~
-- load configs based on env
+- ~~load configs based on env~~
 - feature/module wise folder structure
 - db connection
 - ~~curls~~
