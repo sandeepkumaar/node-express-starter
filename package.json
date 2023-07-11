@@ -1,11 +1,12 @@
 {
   "name": "node-express-starter",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "starter template for expressjs",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node index.js >> logs/app.log",
-    "dev": "nodemon index.js | ntee logs/dev.log | bunyan -o json",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "start:local": "cross-env NODE_ENV=local-dev nodemon index.js | pino-pretty -t",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -17,13 +18,15 @@
   "author": "sandeepkumaar.c",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "uuid": "^3.3.2"
+    "body-parser": "^1.20.2",
+    "error-to-json": "^2.0.0",
+    "express": "^4.18.2",
+    "pino": "^8.14.1",
+    "pino-pretty": "^10.0.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "bunyan": "^1.8.12",
-    "nodemon": "^2.0.2",
-    "ntee": "^2.0.0"
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.0.1"
   }
 }
