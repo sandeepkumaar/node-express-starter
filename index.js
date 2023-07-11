@@ -1,7 +1,11 @@
 // listen for request
+import config from 'config';
 import app from './src/index.js'
 
-const server = app.listen(process.env.port || 8000, function () {
+
+const { port } = config.server;
+
+const server = app.listen(port, function () {
   const port = server.address().port;
   console.log('service listening on port:', port);
 });
