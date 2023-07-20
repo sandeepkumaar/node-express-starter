@@ -18,7 +18,7 @@ let defaultOpts = {
     ...customSerializers,
   },
   formatters: {
-    level: (label, number) => ({level: label})
+    level: (label='') => ({level: label})
   },
   transport: {
     target: 'pino/file'
@@ -26,7 +26,7 @@ let defaultOpts = {
 }
 
 
-export default function createLogger(name, opts={}) {
+export default function createLogger(name='pino', opts={}) {
   let loggerOpts = {...defaultOpts, ...opts};
   return pino({
     name,
